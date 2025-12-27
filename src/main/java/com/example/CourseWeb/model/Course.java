@@ -23,8 +23,8 @@ public class Course {
     @Column(nullable = false)
     String courseName;
 
-    @NotBlank(message = "Description cannot be blank")
-    @Size(min=20, max=200,message = "Description length should be more than 20 and less than 200")
+//    @NotBlank(message = "Description cannot be blank")
+//    @Size(min=20, max=200,message = "Description length should be more than 20 and less than 200")
     @Column(nullable = false)
     String courseDesc;
     String tags;

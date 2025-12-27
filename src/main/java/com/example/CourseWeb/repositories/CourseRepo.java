@@ -7,4 +7,5 @@ public interface CourseRepo extends JpaRepository<Course,Integer> {
 
     Course getCourseByCourseId(Integer courseId);
 
+//    Course updateCourseByCourseId(Course updateCourse,Integer courseId);
 }
