@@ -36,6 +36,11 @@ public class OrderController {
         return new ResponseEntity<>(service.getOrderById(orderId),HttpStatus.OK);
     }
 
+//    @GetMapping("/{orderId}")
+//    public ResponseEntity<Order> getOrderById(@PathVariable Integer orderId){
+//        return new ResponseEntity<>(service.getOrderById(orderId),HttpStatus.FOUND);
+//    }
+
     @DeleteMapping("/{orderId}")
     public ResponseEntity<String> deleteOrderById(@PathVariable Integer orderId){
         service.deleteOrderById(orderId);

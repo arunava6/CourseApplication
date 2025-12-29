@@ -31,9 +31,13 @@ public class OrderService {
     }
 
     public void deleteOrderById(Integer orderId) {
-        if(!repo.existsById(orderId)){
+        if (!repo.existsById(orderId)) {
             throw new ResourceNotFoundException("Order Id not found!!");
         }
         repo.deleteById(orderId);
     }
+
+//    public Order getOrderById(Integer orderId) {
+//        return repo.findByorderId(orderId).orElseThrow(() -> new ResourceNotFoundException("Order id not found!!"));
+//    }
 }
