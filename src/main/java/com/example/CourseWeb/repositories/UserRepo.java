@@ -1,16 +1,12 @@
 package com.example.CourseWeb.repositories;
 
-import com.example.CourseWeb.model.Order;
 import com.example.CourseWeb.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface OrderRepo extends JpaRepository<Order,Integer> {
-//    Optional<Order> findByorderId(Integer orderId);
-    List<Order> findByUser(User user);
-
+public interface UserRepo extends JpaRepository<User,Long> {
+    Optional<User> findByEmail(String email);
 }

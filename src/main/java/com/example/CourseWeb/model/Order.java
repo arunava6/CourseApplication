@@ -23,6 +23,10 @@ public class Order {
     @JoinColumn(name = "courseId")
     Course course;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    User user;
+
     @PastOrPresent
     LocalDate purchaseDate;
 

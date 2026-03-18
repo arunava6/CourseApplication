@@ -2,7 +2,10 @@ package com.example.CourseWeb.service;
 
 import com.example.CourseWeb.exceptions.ResourceNotFoundException;
 import com.example.CourseWeb.model.Order;
+import com.example.CourseWeb.model.User;
 import com.example.CourseWeb.repositories.OrderRepo;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,15 +22,18 @@ public class OrderService {
         return repo.findAll();
     }
 
-    public void placeOrder(Order order) {
-        repo.save(order);
+    public List<Order> getOrdersForCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+
+        return repo.findByUser(user);
     }
 
-    public Order getOrderById(Integer orderId) {
-        return repo.findById(orderId).orElseThrow(() -> new ResourceNotFoundException(
-                "Order Id not found!!"
-                )
-        );
+    public void placeOrder(Order order) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        order.setUser(user);
+        repo.save(order);
     }
 
     public void deleteOrderById(Integer orderId) {

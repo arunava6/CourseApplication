@@ -11,8 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
-@CrossOrigin("http://localhost:5173")
-
 public class OrderController {
     private final OrderService service;
 
@@ -20,20 +18,20 @@ public class OrderController {
         this.service = service;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<?> placeOrder(@Valid @RequestBody Order order){
+    @PostMapping("/add")
+    public ResponseEntity<?> placeOrder(@Valid @RequestBody Order order) {
         service.placeOrder(order);
         return ResponseEntity.status(HttpStatus.CREATED).body("Order Placed Successfully!!");
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Order>> getAllOrders(){
-        return new ResponseEntity<>(service.getAllOrders(),HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<Order>> getAllOrders() {
+        return new ResponseEntity<>(service.getAllOrders(), HttpStatus.OK);
     }
 
-    @GetMapping("/{orderId}")
-    public ResponseEntity<?> getOrderById(@PathVariable Integer orderId){
-        return new ResponseEntity<>(service.getOrderById(orderId),HttpStatus.OK);
+    @GetMapping("/my-order")
+    public ResponseEntity<?> getOrderByUser() {
+        return new ResponseEntity<>(service.getOrdersForCurrentUser(), HttpStatus.OK);
     }
 
 //    @GetMapping("/{orderId}")
@@ -42,8 +40,8 @@ public class OrderController {
 //    }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<String> deleteOrderById(@PathVariable Integer orderId){
+    public ResponseEntity<String> deleteOrderById(@PathVariable Integer orderId) {
         service.deleteOrderById(orderId);
-        return new ResponseEntity<>("Deleted Successfully!!",HttpStatus.OK);
+        return new ResponseEntity<>("Deleted Successfully!!", HttpStatus.OK);
     }
 }
